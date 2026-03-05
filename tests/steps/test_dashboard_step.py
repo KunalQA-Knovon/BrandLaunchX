@@ -144,7 +144,7 @@ def at_risk_tasks_card_count(page: Page, shared_data):
 
 @then("the sum of Completed, Ongoing, delayed and At Risk tasks should be equal to Total Tasks")
 def calculate_total_counts_of_tasks(page:Page,shared_data):
-    with allure.step("Matching sum of Completed, Ongoing, delayed and At Risk tasks with total tasks count"):
+    with allure.step("Matching sum of Completed, Ongoing, delayed and At Risk tasks with total tasks"):
         list_data = shared_data.get("task_list")
         assert list_data is not None, "Task list data not captured!"
         onTime = int(list_data["On Time"])
