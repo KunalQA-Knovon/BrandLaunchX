@@ -1,0 +1,1 @@
+[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:48 <Locator frame=<Frame name= url='https://test.brandlaunchx.com/Dashboard'> selector="//span[@class='launch_date']/h3">

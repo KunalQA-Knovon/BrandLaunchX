@@ -12,11 +12,10 @@ def get_logger(name):
     if logger.handlers:
         return logger
     
-    logger.setLevel(logging.INFO)
+    # logger.setLevel(logging.INFO)
 
     formatter = logging.Formatter(
-        "%(asctime)s | %(levelname)s | %(name)s | %(message)s", 
-        datefmt="%Y-%m-%d %H:%M:%S")
+        "%(asctime)s | %(levelname)s | %(name)s | %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     
     file_Handler = logging.FileHandler(log_file, mode="a")
     file_Handler.setLevel(logging.INFO)

@@ -1,4 +1,5 @@
 from pages.base_page import BasePage
+import re
 
 class DashboardPage(BasePage):
     def __init__(self, page, logger_name=None):
@@ -13,11 +14,18 @@ class DashboardPage(BasePage):
     country_name_locator = "xpath=.//div[contains(@class,'cntry_name')]"
     at_risk_count_locator = "xpath=.//h6[normalize-space()='Task(s) at Risk']/following-sibling::h3"
     delayed_count_locator = "xpath=.//h6[normalize-space()='Task(s) Delayed']/following-sibling::h3"
+    cost_impact_locator = "//h2[contains(normalize-space(),'Cost Impact')]"
+    delay_locator = "//h2[contains(normalize-space(),'Delay')]"
+    launch_date = "//span[@class='launch_date']/h3"
 
 
     def total_task_count(self):
       self.page.wait_for_load_state(state="")
       return self.get_text(self.total_Task_Count_Locator)
+    
+    def get_Launch_date(self):
+      self.page.wait_for_load_state(state="domcontentloaded")
+      return self.page.locator(self.launch_date)
     
 
     def completed_task_count(self):
@@ -30,6 +38,23 @@ class DashboardPage(BasePage):
     def atRisk_task_count(self):
       return self.get_text(self.atRisk_Task_Count_Locator)
     
+    def get_cost_impect(self):
+      cost_impect_text = self.page.locator(self.cost_impact_locator).inner_text()
+      match = re.search(r'\d+', cost_impect_text)
+      if match:
+         return match.group()
+      else:
+         None
+    
+    def get_delay_impect(self):
+      delay_text = self.page.locator(self.delay_locator).inner_text()
+      match = re.search(r'\d+', delay_text)
+      if match:
+         return match.group()
+      else:
+         None
+
+
     def get_table_data(self):
         rows = self.page.locator(self.table_locator)
         table_data = {}
@@ -76,3 +101,4 @@ class DashboardPage(BasePage):
                 "delayed_pct": delayed_pct
             }
         return country_data
+    

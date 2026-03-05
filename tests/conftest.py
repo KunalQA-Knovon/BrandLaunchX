@@ -1,8 +1,10 @@
 import pytest
 import os
 import sys
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, Page
 from playwright.sync_api import Browser
+import allure
+from datetime import datetime
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -52,3 +54,26 @@ def page(context):
 def shared_data():
     """Dictionary shared across feature files."""
     return {}
+
+# @pytest.hookimpl(hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
+#     outcome = yield
+#     rep = outcome.get_result()
+
+#     # 🔥 capture on SETUP or CALL failure
+#     if rep.failed and rep.when in ("setup", "call"):
+#         page = item.funcargs.get("page", None)
+
+#         if page:
+#             try:
+#                 if not page.is_closed():
+#                     screenshot = page.screenshot(full_page=True)
+#                     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+#                     allure.attach(
+#                         screenshot,
+#                         name=f"{item.name}_{rep.when}_FAIL_{timestamp}",
+#                         attachment_type=allure.attachment_type.PNG
+#                     )
+#             except Exception as e:
+#                 print("Screenshot capture failed:", e)

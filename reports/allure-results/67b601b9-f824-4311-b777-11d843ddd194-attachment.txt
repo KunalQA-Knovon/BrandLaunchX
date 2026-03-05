@@ -1,0 +1,2 @@
+[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:20 cost: 50
+[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:31 Total delayed time: 3
