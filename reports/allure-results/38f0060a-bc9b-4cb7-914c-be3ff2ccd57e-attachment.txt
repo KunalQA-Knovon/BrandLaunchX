@@ -1,4 +1,0 @@
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:152 Commerical Effectiveness passed
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:171 Function Name: Commerical Effectiveness
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:172 Task List Data: {'On Time': 37, 'Marketing': 12, 'total_tasks': 49, 'Delayed': 2, 'Launch Localisation': 8, 'Completed': 4, 'Launch Localisation_completed': 3, 'At Risk': 6, 'Market Access': 3, 'Market Access_completed': 1, 'Regulatory Team': 2, 'Medical Affairs': 4, 'Patient Strategy': 2, 'Forecasting': 2, 'Commerical Effectiveness': 2, 'Tech Ops': 3, 'Manufacturing': 11}
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:183 0.0 vs 0.0
