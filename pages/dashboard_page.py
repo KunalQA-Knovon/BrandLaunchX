@@ -63,7 +63,7 @@ class DashboardPage(BasePage):
             row = rows.nth(i)
             function_name = row.locator("td").nth(0).inner_text().strip()
             total_task = row.locator("td").nth(1).inner_text().strip()
-            completed_task_percentage = row.locator("td").nth(2).locator("span").inner_text().strip()
+            completed_task_percentage = row.locator("td").nth(2).locator("span").inner_text().strip().replace('%',"")
             table_data[function_name]={"total_task":total_task, "percentage":completed_task_percentage}
             
         return table_data

@@ -34,7 +34,7 @@ def browser():
 
 @pytest.fixture(scope="session")
 def context(browser:Browser):
-    context = browser.new_context()
+    context = browser.new_context(viewport=None)
     yield context
     context.close()
 

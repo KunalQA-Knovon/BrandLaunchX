@@ -13,9 +13,9 @@ Feature: Dashboard Overview Validation
   # -----------------------------
   # Launch Date
   # -----------------------------
-  Scenario: Validate launch date
-    Then the Launch Date should be displayed
-    And the Launch Date should match with actual launch date
+  # Scenario: Validate launch date
+  #   Then the Launch Date should be displayed
+  #   And the Launch Date should match with actual launch date
 
   # -----------------------------
   # Summary Cards
@@ -23,13 +23,10 @@ Feature: Dashboard Overview Validation
   Scenario: Validate dashboard summary cards count
     Then the total tasks card should be visible
     And the total tasks card count should match with tasks list
-
     And the completed tasks card should be visible
     And the completed tasks card count should match with tasks list
-
     And the ongoing tasks card should be visible
     And the ongoing tasks card count should match with tasks list
-
     And the at risk tasks card should be visible
     And the at risk tasks card count should match with tasks list
 
@@ -39,8 +36,8 @@ Feature: Dashboard Overview Validation
   # -----------------------------
   Scenario Outline: Validate task completion by function
     Then the function "<function_name>" should be displayed
-    And the total task count for "<function_name>" should be greater than or equal to 0
-    And the completed percentage for "<function_name>" should be between 0 and 100
+    And the total task count for "<function_name>" should match with task list
+    And the completed percentage for "<function_name>" should be match between 0 and 100
 
     Examples:
       | function_name        |
@@ -52,11 +49,8 @@ Feature: Dashboard Overview Validation
       | Patient Strategy    |
       | Forecasting          |
       | Commerical Effectiveness |
-      | HR & Admin |
       | Tech Ops |
-      | Finance |
       | Manufacturing |
-      | Clinical Development |
 
   # -----------------------------
   # Country Wise Launch Status

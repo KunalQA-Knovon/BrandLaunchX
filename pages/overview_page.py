@@ -13,10 +13,19 @@ class overview(BasePage):
         self.wait_for_visible(self.at_risk_task_indicator)
         return self.get_text(self.at_risk_task_indicator)
     
+    def is_at_risk_displayed(self):
+        self.wait_for_visible(self.at_risk_task_indicator)
+        return self.page.locator(self.at_risk_task_indicator)
+    
     def get_delay_count(self):
         element = self.page.locator(self.delay_task_indicator)
         element.wait_for(state="visible")
         return element.inner_text()
+    
+    def is_delayed_displayed(self):
+        element = self.page.locator(self.delay_task_indicator)
+        element.wait_for(state="visible")
+        return element
     
     def get_task_finish_perc(self):
         element = self.page.locator(self.finished_impact_navigator)

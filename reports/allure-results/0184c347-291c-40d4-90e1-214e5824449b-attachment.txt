@@ -1,4 +1,0 @@
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:59 Total tasks card count: 49
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:85 Completed tasks card count: 4
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:111 Ongoing tasks card count: 37
-[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:143 At Risk tasks card count: 6
