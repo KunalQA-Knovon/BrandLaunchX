@@ -83,7 +83,7 @@ class listTask(BasePage):
 
                     # ---- Completed by Functional Type ----
                     if complete_status == "Completed":
-                        completed_key = f"{func_text.replace(' ', '_')}_completed"
+                        completed_key = f"{func_text}_completed"
                         task_counts[completed_key] = task_counts.get(completed_key, 0) + 1
 
                 except Exception as e:

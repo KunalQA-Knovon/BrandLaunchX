@@ -1,9 +1,10 @@
-from pytest_bdd import given, then
+from pytest_bdd import given, then, parsers
 from playwright.sync_api import Page, expect
 from utils.config import BASE_URL
 from pages.dashboard_page import DashboardPage
 import logging
 import allure
+import math
 
 logger = logging.getLogger(__name__)
 
@@ -44,9 +45,9 @@ def launch_date_visible(page:Page):
 def launch_date_format(page:Page):
     with allure.step("Validating Launch Date is displayed"):
         dashboard = DashboardPage(page)
-        date = dashboard.get_Launch_date().inner_text()
+        date = dashboard.get_Launch_date()
         logger.info(date)
-        # expect(date).to_have_text("1 Feb, 2030")
+        expect(date).to_have_text("1 Feb, 2030")
 
 @then("the total tasks card should be visible")
 def total_tasks_card_visible(page: Page):
@@ -140,7 +141,45 @@ def at_risk_tasks_card_count(page: Page, shared_data):
     with allure.step(f"Validate risk tasks count from task list. Expected counts: {expectedRiskCount}, Actual counts: {actualRiskTasks}"):
         assert int(actualRiskTasks) == expectedRiskCount,(
             f"Completed task counts not matched. Expected {expectedRiskCount}, got {actualRiskTasks}")
-        
+
+
+@then(parsers.parse('the function "{function_name}" should be displayed'))
+def validate_function_displayed(page: Page, function_name):
+    dashboard = DashboardPage(page)
+    data = dashboard.get_table_data()
+
+    assert function_name in data, f"{function_name} not found in dashboard"
+    logger.info(f"{function_name} passed")
+
+
+@then(parsers.parse('the total task count for "{function_name}" should match with task list'))
+def validate_task_count(page: Page, function_name, shared_data):
+    dashboard = DashboardPage(page)
+    listData = shared_data.get("task_list")
+    assert listData is not None, "Task list data not captured!"
+    listCount = int(listData[function_name])
+    data = dashboard.get_table_data()
+    dashboardCount = int(data[function_name]["total_task"])
+    assert dashboardCount==listCount, f"Count of {function_name} not matched. Expected count: {listCount}, got: {dashboardCount}"
+    
+
+@then(parsers.parse('the completed percentage for "{function_name}" should be match between 0 and 100'))
+def validate_percentage(page: Page, function_name, shared_data):
+    dashboard = DashboardPage(page)
+    listData = shared_data.get("task_list") or {}
+
+    # Always return 0 if key not found
+    funcTotalCount = int(listData.get(function_name.strip(), 0))
+    funcCompletedCount = int(listData.get(f"{function_name.strip()}_completed", 0))
+
+    if funcCompletedCount == 0:
+        finalPer = float(0)
+    finalPer = round(((funcCompletedCount/funcTotalCount)*100),1)
+    data = dashboard.get_table_data()
+    funcPercentage = float(data[function_name]["percentage"])
+    logger.info(f"{finalPer} vs {funcPercentage}")
+    assert finalPer==funcPercentage, f"Count of {function_name} not matched. Expected count: {finalPer}, got: {funcPercentage}"
+
 
 @then("the sum of Completed, Ongoing, delayed and At Risk tasks should be equal to Total Tasks")
 def calculate_total_counts_of_tasks(page:Page,shared_data):
@@ -154,5 +193,5 @@ def calculate_total_counts_of_tasks(page:Page,shared_data):
 
         totalCount =  onTime+atRisk+completed+delayed
         total_tasks = int(list_data["total_tasks"])
-        assert(totalCount==total_tasks, f"Total tasks count not matched. Expected{total_tasks}, got{totalCount}")
+        assert totalCount==total_tasks, f"Total tasks count not matched. Expected{total_tasks}, got{totalCount}"
         

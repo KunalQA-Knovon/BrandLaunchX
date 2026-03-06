@@ -1,0 +1,2 @@
+[32mINFO    [0m tests.steps.test_overview_step:test_overview_step.py:26 Expected: 6 - Actual: 6
+[32mINFO    [0m tests.steps.test_overview_step:test_overview_step.py:45 Expected: 2 - Actual: 2
