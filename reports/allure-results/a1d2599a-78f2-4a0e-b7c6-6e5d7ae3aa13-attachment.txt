@@ -1,0 +1,2 @@
+[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:152 Market Access passed
+[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:180 33.3 vs 33.3

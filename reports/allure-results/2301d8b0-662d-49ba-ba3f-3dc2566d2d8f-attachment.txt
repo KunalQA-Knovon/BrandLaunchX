@@ -1,0 +1,2 @@
+[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:152 Patient Strategy passed
+[32mINFO    [0m tests.steps.test_dashboard_step:test_dashboard_step.py:180 0.0 vs 0.0
